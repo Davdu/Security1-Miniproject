@@ -1,9 +1,68 @@
-# Security1-Miniproject
+# System Report
 
-## Vulnerabilities
+## 1. Introduction
+This project involves setting up and securing a vulnerable Flask web application on a Linux server. The initial tasks include installing the Flask server and addressing critical security flaws, such as SQL injection vulnerabilities. Once the web application is secured, two deliberate backdoors are introduced: one that allows user-level access and another that provides root-level access. This setup prepares for the second phase, where servers will be exchanged with a partner group to test defenses and exploit each other’s vulnerabilities. All configurations are conducted on an ITU-hosted virtual machine accessed via SSH.
 
-### SQL-Injection
 
-* Admin Authentication and Authorization
-  * Login: `' OR '1'='1`
-  * Password: `' OR '1'='1`
+## 2. Initial Setup
+- **Server Access**: 
+  - VPN and SSH setup steps
+    - `ssh -J pensim@130.226.143.130 student@10.0.1.060`
+    - `InjectBen10`
+- **Flask Installation**:
+  - Commands: `sudo apt update && sudo apt install python3-flask`
+  - Configuration details
+
+
+
+## 3. System Hardening
+- **Found Vulnerabilities**:
+  - Login Bypassing with `' OR '1'='1` used as password.
+  - Import notes with unknown noteId with `1 OR 1=1` used as input in the Import External Notes input field.
+
+- **Web Application Security**:
+  - Patching SQL Injection vulnerabilities
+  - Techniques used (e.g., parameterized queries, input validation)
+
+- **Server Hardening**:
+  - Firewall settings
+  - SSH security enhancements
+  - Removal of unnecessary services
+
+
+## 4. Additional Services
+- **Installed Services**:
+  - Description of additional services added (e.g., FTP server, proxy server)
+  - Purpose and configuration details
+- **Service Versions**:
+  - List of services with version numbers
+  - Rationale for chosen services
+
+
+## 5. Introduced Vulnerabilities
+- **User Access Vulnerability**:
+  - Description: How an attacker can gain shell access
+  - Example methods: SQL injection, outdated service, hidden admin panel
+  - Intended exploitation path
+
+- **Root Access Vulnerability**:
+  - Description: How an attacker can escalate to root
+  - Example methods: Misconfigured CRON jobs, leaked credentials, SUID binaries
+  - Detailed explanation of the intended escalation process
+
+
+## 6. Testing and Verification
+- **Local Testing**: 
+  - SSH tunnel setup and verification steps
+  - Tools used to test vulnerabilities and system defenses
+
+
+## 7. Conclusion
+- **Summary**: Overview of system setup and defense mechanisms
+- **Next Steps**: Brief on the upcoming attack phase and expected challenges
+
+
+## Appendix
+- **Useful Commands and Links**:
+  - VPN setup link: [ITU Remote Access](https://itustudent.itu.dk/campus-life/it-services/remote-access)
+  - List of commonly used passwords: [Top 1000 Passwords](https://github.com/danielmiessler/SecLists/blob/master/Passwords/Common-Credentials/10-million-password-list-top-1000.txt)
