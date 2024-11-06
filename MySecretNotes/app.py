@@ -100,9 +100,10 @@ def notes():
     
     db = connect_db()
     c = db.cursor()
+    userid =  session['userid']
     statement = '"SELECT * FROM notes WHERE assocUser = :userid"'
     print(statement)
-    c.execute("SELECT * FROM notes WHERE assocUser = :userid", data)
+    c.execute("SELECT * FROM notes WHERE assocUser = ?", (userid,))
     notes = c.fetchall()
     print(notes)
     
