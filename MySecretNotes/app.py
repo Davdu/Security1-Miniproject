@@ -113,14 +113,15 @@ def notes():
 def login():
     error = ""
     if request.method == 'POST':
-        data = ({
-            "username" : request.form['username'], 
-            "password" : request.form['password']
-        })
+
+        
+        username = request.form['username'] 
+        password = request.form['password']
+        
 
         db = connect_db()
         c = db.cursor()
-        c.execute("SELECT * FROM users WHERE username = :username AND password = :password", data)
+        c.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
         result = c.fetchall()
 
         if len(result) > 0:
@@ -141,19 +142,19 @@ def register():
     passworderror = ""
     if request.method == 'POST':
         
-        data = ({
-            "username" : request.form['username'], 
-            "password" : request.form['password']
-        })
+    
+        username = request.form['username'], 
+        password = request.form['password']
+    
 
         db = connect_db()
         c = db.cursor()
-        c.execute("SELECT * FROM users WHERE password = :password", data)
+        c.execute("SELECT * FROM users WHERE password = ?", (password,))
         if(len(c.fetchall())>0):
             errored = True
             passworderror = "That password is already in use by someone else!"
 
-        c.execute("SELECT * FROM users WHERE username = :username", data)
+        c.execute("SELECT * FROM users WHERE username = ?", (username,))
         if(len(c.fetchall())>0):
             errored = True
             usererror = "That username is already in use by someone else!"
@@ -161,7 +162,7 @@ def register():
         if(not errored):
             statement = '"INSERT INTO users(id,username,password) VALUES(null,:username,:password)"' 
             print(statement)
-            c.execute("INSERT INTO users(id,username,password) VALUES(null,:username,:password)", data )
+            c.execute("INSERT INTO users(id,username,password) VALUES(null,?,?)", (username, password))
             db.commit()
             db.close()
             return f"""<html>
