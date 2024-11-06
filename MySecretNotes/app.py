@@ -85,7 +85,7 @@ def notes():
             db.commit()
             db.close()
         elif request.form['submit_button'] == 'import note':
-            noteid = request.form['noteid'] ## Sanitize this
+            noteid = request.form['noteid'] 
             db = connect_db()
             c = db.cursor()
             c.execute("SELECT * from NOTES where publicID = ?", noteid)
