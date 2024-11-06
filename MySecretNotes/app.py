@@ -160,9 +160,9 @@ def register():
             usererror = "That username is already in use by someone else!"
 
         if(not errored):
-            statement = '"INSERT INTO users(id,username,password) VALUES(null,:username,:password)"' 
+            statement = '"INSERT INTO users(id,username,password) VALUES(null, :username, :password)"' 
             print(statement)
-            c.execute("INSERT INTO users(id,username,password) VALUES(null,:username,:password)", data )
+            c.execute("INSERT INTO users(id,username,password) VALUES(null, :username, :password)", data)
             db.commit()
             db.close()
             return f"""<html>
