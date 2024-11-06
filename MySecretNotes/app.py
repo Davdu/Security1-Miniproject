@@ -100,9 +100,9 @@ def notes():
     
     db = connect_db()
     c = db.cursor()
-    statement = "SELECT * FROM notes WHERE assocUser = %s;" %session['userid'] ## Sanitize this
+    statement = '"SELECT * FROM notes WHERE assocUser = :userid"'
     print(statement)
-    c.execute(statement)
+    c.execute("SELECT * FROM notes WHERE assocUser = :userid", data)
     notes = c.fetchall()
     print(notes)
     
@@ -113,12 +113,14 @@ def notes():
 def login():
     error = ""
     if request.method == 'POST':
-        username = request.form['username'] ## Sanitize this
-        password = request.form['password'] ## Sanitize this
+        data = ({
+            "username" : request.form['username'], 
+            "password" : request.form['password']
+        })
+
         db = connect_db()
         c = db.cursor()
-        statement = "SELECT * FROM users WHERE username = '%s' AND password = '%s';" %(username, password) ## Sanitize this
-        c.execute(statement)
+        c.execute("SELECT * FROM users WHERE username = :username AND password = :password", data)
         result = c.fetchall()
 
         if len(result) > 0:
