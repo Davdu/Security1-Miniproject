@@ -92,7 +92,7 @@ def notes():
             result = c.fetchall()
             if(len(result)>0):
                 row = result[0]
-                c.execute("INSERT INTO notes(id,assocUser,dateWritten,note,publicID) VALUES(null,?,?,?,?)",session['userid'],row[2],row[3],row[4] )
+                c.execute("INSERT INTO notes(id,assocUser,dateWritten,note,publicID) VALUES(null,?,?,?,?)", (session['userid'],row[2],row[3],row[4]) )
             else:
                 importerror="No such note with that ID!"
             db.commit()
@@ -113,15 +113,15 @@ def notes():
 def login():
     error = ""
     if request.method == 'POST':
-
         
-        username = request.form['username'] 
-        password = request.form['password']
-        
+        data = ({
+            "username" : request.form['username'], 
+            "password" : request.form['password']
+        })
 
         db = connect_db()
         c = db.cursor()
-        c.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
+        c.execute("SELECT * FROM users WHERE username = :username AND password = :password", data)
         result = c.fetchall()
 
         if len(result) > 0:
@@ -142,19 +142,19 @@ def register():
     passworderror = ""
     if request.method == 'POST':
         
-    
-        username = request.form['username'], 
-        password = request.form['password']
-    
+        data = ({
+            "username" : request.form['username'], 
+            "password" : request.form['password']
+        })
 
         db = connect_db()
         c = db.cursor()
-        c.execute("SELECT * FROM users WHERE password = ?", (password,))
+        c.execute("SELECT * FROM users WHERE password = :password", data)
         if(len(c.fetchall())>0):
             errored = True
             passworderror = "That password is already in use by someone else!"
 
-        c.execute("SELECT * FROM users WHERE username = ?", (username,))
+        c.execute("SELECT * FROM users WHERE username = :username", data)
         if(len(c.fetchall())>0):
             errored = True
             usererror = "That username is already in use by someone else!"
@@ -162,7 +162,7 @@ def register():
         if(not errored):
             statement = '"INSERT INTO users(id,username,password) VALUES(null,:username,:password)"' 
             print(statement)
-            c.execute("INSERT INTO users(id,username,password) VALUES(null,?,?)", (username, password))
+            c.execute("INSERT INTO users(id,username,password) VALUES(null,:username,:password)", data )
             db.commit()
             db.close()
             return f"""<html>
