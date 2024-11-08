@@ -140,7 +140,7 @@ def login():
 def register():
     errored = False
     usererror = ""
-    passworderror = ""
+
     if request.method == 'POST':
 
         data = ({
@@ -174,7 +174,7 @@ def register():
 
         db.commit()
         db.close()
-    return render_template('register.html',usererror=usererror,passworderror=passworderror)
+    return render_template('register.html',usererror=usererror)
 
 
 @app.route("/logout/")
