@@ -34,6 +34,8 @@ This project involves setting up and securing a vulnerable Flask web application
 
 - **Web Application Security**:
   - Patching SQL Injection vulnerabilities
+    - Through parameterized queries
+    - Input sanitation
   - Techniques used (e.g., parameterized queries, input validation)
 
 - **Server Hardening**:
