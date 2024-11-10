@@ -14,31 +14,33 @@
 This project involves setting up and securing a vulnerable Flask web application on a Linux server. The initial tasks include installing the Flask server and addressing critical security flaws, such as SQL injection vulnerabilities. Once the web application is secured, two deliberate backdoors are introduced: one that allows user-level access and another that provides root-level access. This setup prepares for the second phase, where servers will be exchanged with a partner group to test defenses and exploit each other’s vulnerabilities. All configurations are conducted on an ITU-hosted virtual machine accessed via SSH.
 
 
+
 ## 2. Initial Setup
 - **Server Access**: 
   - VPN and SSH setup steps
-    - `ssh -J pensim@130.226.143.130 student@10.0.1.060`
-    - `InjectBen10`
+    - SSH: `ssh -J pensim@130.226.143.130 student@10.0.1.060`
+    - Password: `InjectBen10`
 - **Flask Installation**:
-  - Commands: `sudo apt update && sudo apt install python3-flask`
-  - Configuration details
+  - Commands: 
+    - `sudo apt update && sudo apt install python3`
+    - `sudo apt install python3-flask`
 
 
 
 ## 3. System Hardening
 - **Found Vulnerabilities**:
+  - Direct connection between user input and database queries. 
   - Login Bypassing with `' OR '1'='1` used as password.
   - Import notes with unknown noteId with `1 OR 1=1` used as input in the Import External Notes input field.
-  - Direct connection between user input and database queries. 
   - A user having the same password as an unregistered user would trigger a "Password already in use" error message, upon registration. 
 
 - **Web Application Security**:
-  - Patching SQL Injection vulnerabilities
-  - Techniques used (e.g., parameterized queries, input validation)
+  - Patching SQL Injection vulnerabilities by using parameterized queries.
 
 - **Server Hardening**:
-  - Firewall settings
   - SSH security enhancements
+    - Changed password
+  - Firewall settings
   - Removal of unnecessary services
 
 
@@ -70,8 +72,7 @@ This project involves setting up and securing a vulnerable Flask web application
 
 
 ## 7. Conclusion
-- **Summary**: Overview of system setup and defense mechanisms
-- **Next Steps**: Brief on the upcoming attack phase and expected challenges
+ Create **Summary** here.
 
 
 ## Appendix
