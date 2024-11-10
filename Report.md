@@ -16,9 +16,13 @@ This project involves setting up and securing a vulnerable Flask web application
 
 ## 2. Initial Setup
 - **Server Access**: 
-  - VPN and SSH setup steps
-    - `ssh -J pensim@130.226.143.130 student@10.0.1.060`
-    - `InjectBen10`
+  - SSH connection details
+    - Student:
+      - `ssh -J pensim@130.226.143.130 student@10.0.1.060`
+      - `InjectBen10`
+    - Root:
+      - `ImRoot`
+
 - **Flask Installation**:
   - Commands: `sudo apt update && sudo apt install python3-flask`
   - Configuration details
