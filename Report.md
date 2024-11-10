@@ -29,6 +29,7 @@ This project involves setting up and securing a vulnerable Flask web application
 - **Found Vulnerabilities**:
   - Login Bypassing with `' OR '1'='1` used as password.
   - Import notes with unknown noteId with `1 OR 1=1` used as input in the Import External Notes input field.
+  - Direct connection between data input and database queries. 
 
 - **Web Application Security**:
   - Patching SQL Injection vulnerabilities
