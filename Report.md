@@ -1,5 +1,15 @@
 # System Report
 
+## Table of Contents
+  1. [Introduction](#1-introduction)
+  2. [Initial Setup](#2-initial-setup)
+  3. [System Hardening](#3-system-hardening)
+  4. [Additional Services](#4-additional-services)
+  5. [Introduced Vulnerabilities](#5-introduced-vulnerabilities)
+  6. [Testing and Verification](#6-testing-and-verification)
+  7. [Conclusion](#7-conclusion)
+  8. [Appendix](#appendix)
+
 ## 1. Introduction
 This project involves setting up and securing a vulnerable Flask web application on a Linux server. The initial tasks include installing the Flask server and addressing critical security flaws, such as SQL injection vulnerabilities. Once the web application is secured, two deliberate backdoors are introduced: one that allows user-level access and another that provides root-level access. This setup prepares for the second phase, where servers will be exchanged with a partner group to test defenses and exploit each other’s vulnerabilities. All configurations are conducted on an ITU-hosted virtual machine accessed via SSH.
 
