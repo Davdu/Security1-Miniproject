@@ -30,6 +30,7 @@ This project involves setting up and securing a vulnerable Flask web application
   - Login Bypassing with `' OR '1'='1` used as password.
   - Import notes with unknown noteId with `1 OR 1=1` used as input in the Import External Notes input field.
   - Direct connection between data input and database queries. 
+  - A user having the same password as an unregistered user would trigger a "Password already in use" error message, upon registration. 
 
 - **Web Application Security**:
   - Patching SQL Injection vulnerabilities
