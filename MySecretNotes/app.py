@@ -79,13 +79,13 @@ def notes():
 
             db = connect_db()
             c = db.cursor()
-            statement = '"INSERT INTO notes(id,assocUser,dateWritten,note,publicID) VALUES(null,:userid,:date,:note,:publicid);"' 
+            statement = '"INSERT INTO notes(id,assocUser,dateWritten,note,publicID) VALUES(null,:userid,:date,:note,:publicid);"'
             print(statement)
             c.execute("INSERT INTO notes(id,assocUser,dateWritten,note,publicID) VALUES(null,:userid,:date,:note,:publicid)", data )
             db.commit()
             db.close()
         elif request.form['submit_button'] == 'import note':
-            noteid = request.form['noteid'] 
+            noteid = request.form['noteid']
             db = connect_db()
             c = db.cursor()
             c.execute("SELECT * from NOTES where publicID = ?", noteid)
@@ -97,7 +97,7 @@ def notes():
                 importerror="No such note with that ID!"
             db.commit()
             db.close()
-    
+
     db = connect_db()
     c = db.cursor()
     userid =  session['userid']
@@ -106,7 +106,7 @@ def notes():
     c.execute("SELECT * FROM notes WHERE assocUser = ?", (userid,))
     notes = c.fetchall()
     print(notes)
-    
+
     return render_template('notes.html',notes=notes,importerror=importerror)
 
 
@@ -114,9 +114,9 @@ def notes():
 def login():
     error = ""
     if request.method == 'POST':
-        
+
         data = ({
-            "username" : request.form['username'], 
+            "username" : request.form['username'],
             "password" : request.form['password']
         })
 
@@ -140,20 +140,15 @@ def login():
 def register():
     errored = False
     usererror = ""
-    passworderror = ""
     if request.method == 'POST':
-        
+
         data = ({
-            "username" : request.form['username'], 
+            "username" : request.form['username'],
             "password" : request.form['password']
         })
 
         db = connect_db()
         c = db.cursor()
-        c.execute("SELECT * FROM users WHERE password = :password", data)
-        if(len(c.fetchall())>0):
-            errored = True
-            passworderror = "That password is already in use by someone else!"
 
         c.execute("SELECT * FROM users WHERE username = :username", data)
         if(len(c.fetchall())>0):
@@ -161,7 +156,7 @@ def register():
             usererror = "That username is already in use by someone else!"
 
         if(not errored):
-            statement = '"INSERT INTO users(id,username,password) VALUES(null, :username, :password)"' 
+            statement = '"INSERT INTO users(id,username,password) VALUES(null, :username, :password)"'
             print(statement)
             c.execute("INSERT INTO users(id,username,password) VALUES(null, :username, :password)", data)
             db.commit()
@@ -175,10 +170,10 @@ def register():
                         </body>
                         </html>
                         """
-        
+
         db.commit()
         db.close()
-    return render_template('register.html',usererror=usererror,passworderror=passworderror)
+    return render_template('register.html',usererror=usererror)
 
 
 @app.route("/logout/")
