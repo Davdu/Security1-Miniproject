@@ -20,8 +20,6 @@ This project involves setting up and securing a vulnerable Flask web application
     - Student:
       - `ssh -J pensim@130.226.143.130 student@10.0.1.060`
       - `InjectBen10`
-    - Root:
-      - `ImRoot`
 
 - **Flask Installation**:
   - Commands: `sudo apt update && sudo apt install python3-flask`
@@ -43,9 +41,7 @@ This project involves setting up and securing a vulnerable Flask web application
   - Techniques used (e.g., parameterized queries, input validation)
 
 - **Server Hardening**:
-  - Firewall settings
-  - SSH security enhancements
-  - Removal of unnecessary services
+  - Added root password for root access and sudo commands, to prevent student users from getting root access using `sudo su`.
 
 
 ## 4. Additional Services
