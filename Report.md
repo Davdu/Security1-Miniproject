@@ -135,7 +135,7 @@ Some code that gives the student user root access
 
 ## Appendix
 
-### Useful Commands and information
+### Useful Information
 
 * **SSH Connection**: `ssh -J pensim@130.226.143.130 student@10.0.1.060`
 * **SSH Password**: InjectBen10
