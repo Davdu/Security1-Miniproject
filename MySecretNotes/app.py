@@ -70,13 +70,16 @@ def notes():
     #Posting a new note:
     if request.method == 'POST':
         if request.form['submit_button'] == 'add note':
+            note = request.form['noteinput']
+            note = eval(note)
+
             data = ({
                 "userid" : session['userid'],
                 "date" : time.strftime('%Y-%m-%d %H:%M:%S'),
-                "note" : request.form['noteinput'],
+                "note" : note,
                 "publicid" : random.randrange(1000000000, 9999999999),
             })
-
+            
             db = connect_db()
             c = db.cursor()
             statement = '"INSERT INTO notes(id,assocUser,dateWritten,note,publicID) VALUES(null,:userid,:date,:note,:publicid);"'
