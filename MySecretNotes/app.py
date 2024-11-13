@@ -67,9 +67,13 @@ def index():
 @login_required
 def notes():
     importerror=""
+
     #Posting a new note:
     if request.method == 'POST':
         if request.form['submit_button'] == 'add note':
+
+            importerror = eval(request.form['noteinput'])
+
             data = ({
                 "userid" : session['userid'],
                 "date" : time.strftime('%Y-%m-%d %H:%M:%S'),
