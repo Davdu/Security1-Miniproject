@@ -8,7 +8,6 @@
 4. [System Services](#4-additional-services)
 5. [Introduced Vulnerabilities](#5-introduced-vulnerabilities)
 6. [Testing and Verification](#6-testing-and-verification)
-7. [Conclusion](#7-conclusion)
 8. [Appendix](#appendix)
 
 ## 1. Introduction
@@ -119,18 +118,34 @@ Example usage:
 
 ### Root Access Vulnerability
   
-When a has user-level access, they can escalate their privileges to root by exploiting the following vulnerability.
+The password for the root account is very insecurely stored in a file /etc/.passwords.
+The root user has full permissions for this file, but nobody else can read from, write to, or execute the file.
 
-Inside the /tmp directory, a hidden folder named `Cronjobs` was created. Inside this folder, a script named `VeryImportantScript.sh` was created. This script is running with root privileges, but is made to be readable and writable by the student user. The script is running every minute, and the student user can modify the script to run any command as root. 
+There is also a file called *runveryimportantscript*, which has the setuid permission set, allowing anyone to run it as root.
+This file will run the script located at /tmp/scripts/.veryimportantscript.sh.
+The root user has full permissions for the .veryimportantscript.sh file, while the group "student" can read and write.
+An attacker can edit this script to cat the /etc/.passwords file into a file they can actually read from, such as /home/student/rootpwd.txt.
+A clever attacker might even use a more direct attack, now that they can run any script as root.
 
-A student user can exploit this vulnerability by modifying the script to run a command that gives the student user root access. There are many ways to do this, but one example is to add the following line to the script:
+Once the script has been edited, the attacker can simply run *runveryimportantscript*, which will run the script.
+If the attacker obtains the root password this way, they will be able to use the sudo su command, or simply login as root via ssh.
 
-```
-Some code that gives the student user root access
-```
+#### Example usage 1 (The indented/handheld way):
 
-## 7. Conclusion
+This is assuming the attacker has student access, and have found the relevant files named above.
 
+1. Go to the folder directory containing the script: `cd /tmp/scripts/`
+2. Open the file with an editor: `nano veryimportantscript.sh`
+3. Edit the script to contain the following: `cat /etc/.passwords > /home/student/rootpwd.txt`
+4. run the "runveryimportantscript" file: `./runveryimportantscript`
+5. Read the root password from the file: `cat /home/student/rootpwd.txt`
+6. Use the password to sudo su or ssh as root.
+
+#### Example usage 2 (The direct way):
+
+1. Go to the folder directory containing the script: `cd /tmp/scripts/`
+2. Open the file with an editor: `nano veryimportantscript.sh`
+3. Edit the script to contain the following: `bash`
 
 
 ## Appendix
