@@ -102,7 +102,7 @@ The next step was to install Flask on the server, to be able to run the applicat
 
 ## 5. Introduced Vulnerabilities
 
-- **User Access Vulnerability** (Remote code execution):
+### User Access Vulnerability (Remote code execution)
 
 A remote code execution vulnerability has been introduced in the /notes endpoint, on the post method.
 Before saving a note to the database, the note is ran as code, in case the user wants to filter the text with custom
@@ -117,19 +117,28 @@ Example usage:
  - Post note.
  - See the result of the executed code in the errormessage.
 
-- **Root Access Vulnerability**:
+### Root Access Vulnerability
+  
+When a has user-level access, they can escalate their privileges to root by exploiting the following vulnerability.
 
-  - Description: How an attacker can escalate to root
-  - Example methods: Misconfigured CRON jobs, leaked credentials, SUID binaries
-  - Detailed explanation of the intended escalation process
+Inside the /tmp directory, a hidden folder named `Cronjobs` was created. Inside this folder, a script named `VeryImportantScript.sh` was created. This script is running with root privileges, but is made to be readable and writable by the student user. The script is running every minute, and the student user can modify the script to run any command as root. 
+
+A student user can exploit this vulnerability by modifying the script to run a command that gives the student user root access. There are many ways to do this, but one example is to add the following line to the script:
+
+```
+Some code that gives the student user root access
+```
 
 ## 7. Conclusion
 
-- **Summary**: Overview of system setup and defense mechanisms
-- **Next Steps**: Brief on the upcoming attack phase and expected challenges
+
 
 ## Appendix
 
-- **Useful Commands and Links**:
-  - VPN setup link: [ITU Remote Access](https://itustudent.itu.dk/campus-life/it-services/remote-access)
-  - List of commonly used passwords: [Top 1000 Passwords](https://github.com/danielmiessler/SecLists/blob/master/Passwords/Common-Credentials/10-million-password-list-top-1000.txt)
+### Useful Commands and information
+
+* **SSH Connection**: `ssh -J pensim@130.226.143.130 student@10.0.1.060`
+* **SSH Password**: InjectBen10
+* **Root Password**: DinoNuggies123
+  
+
