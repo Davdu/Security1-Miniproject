@@ -1,5 +1,6 @@
 # System Report
 
+
 ## Table of Contents
 
 1. [Introduction](#1-introduction)
@@ -7,7 +8,6 @@
 3. [System Hardening](#3-system-hardening)
 4. [System Services](#4-additional-services)
 5. [Introduced Vulnerabilities](#5-introduced-vulnerabilities)
-6. [Testing and Verification](#6-testing-and-verification)
 8. [Appendix](#appendix)
 
 ## 1. Introduction
@@ -52,8 +52,15 @@ The next step was to install Flask on the server, to be able to run the applicat
 
 * The application was also vulnerable by not allowing users to register with the same password as any other user. Furthermore, the application showed the an error message saying "Password already in use" when a user tried to register with a password already in use. This vulnerability would let an adversary know what passwords are used by the application's users.
 
-* We gathered the following information about the server, to find out if there are any services running that could be exploited.
+* We gathered the following information about the server, to find out what services are running on the server:
 
+  - Debian 6.1.112-1
+  - OpenSSH 9.2p1
+  - Apache httpd 2.4.62 ((Debian))
+  - PostgreSQL
+
+  Using Metasploit we then checked to see if any of the services had known exploits. We found that the Apache service was vulnerable to an exploit, although in a previous version. We tested the exploit 
+nonetheless, but the service was not exploitable.
 
 ### Application Hardening
 
@@ -87,17 +94,9 @@ The next step was to install Flask on the server, to be able to run the applicat
 ## 4. System Services
 
 - **Installed Services**:
-  - Description of additional services added (e.g., FTP server, proxy server)
-  - Purpose and configuration details
-  - List of services with version numbers
-  - Rationale for chosen services
-
-- **Server Information For Later Use**:
-    - Linux Kernel: Debian 6.1.112-1
-    - Services Running:
-      - OpenSSH 9.2p1
-      - Apache httpd 2.4.62 ((Debian))
-    - The servers postgresql db is exposed on port 5432
+  - OpenSSH 9.2p1
+  - Apache httpd 2.4.62 ((Debian))
+  - PostgreSQL
 
 ## 5. Introduced Vulnerabilities
 
