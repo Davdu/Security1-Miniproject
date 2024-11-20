@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <link  href="http://fonts.googleapis.com/css?
-    family=Reenie+Beanie:regular" 
+    family=Reenie+Beanie:regular"
     rel="stylesheet"
     type="text/css">
     <style>
@@ -242,7 +242,7 @@ ol, ul, dl {
 }
 
     </style>
-    
+
     <head>
         <title>Note Overview </title>
 
@@ -281,20 +281,20 @@ ol, ul, dl {
               <textarea name="noteinput" placeholder=">Enter text here..." class="textfield form-control" value={{ request.form.noteinput }}></textarea><br>
             </div>
             <input class="btn-solid-lg notes__input-margin-top" type="submit" name="submit_button" value="add note">
-        </form> 
-        
+        </form>
+
         <form action="" method="post" class="notes__input-wrapper">
             <div class="notes__input-container">
               <label for="note">Import a note from someone else:</label>
               <input class="form-control notes__input__no-margin" type="text" placeholder="XXXXXXXXXX" name="noteid" value={{request.form.noteid}}>
             </div>
             <input class="btn-solid-lg notes__input-margin-top" type="submit" name="submit_button" value="import note">
-        </form> 
+        </form>
         {% if importerror %}
               <p class="p-large"><strong>Error:</strong> {{ importerror }}
         {% endif %}
-      </section>     
-      
+      </section>
+
       <!-- Scripts -->
     <script src={{ url_for('static',filename='js/jquery.min.js') }}></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
     <script src={{ url_for('static',filename='js/popper.min.js') }}></script> <!-- Popper tooltip library for Bootstrap -->
