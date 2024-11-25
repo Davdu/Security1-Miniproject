@@ -12,11 +12,11 @@
 
 ## 1. Information Gathering
 
-The only information we gathered, or given, was the IP and username of their server. Now that we had a user, our first thought was to brute force the password for it. As a constraint for the Defense part of the assignment, brute force vulnerable passwords must be on the top 1000 list of passwords handed out to us.
+The only information we gathered, or was given, was the IP and username of their server. Now that we had a user, which was named 'Weakuser', our first thought was to brute force the password for it. As a constraint for the Defense part of the assignment, brute force vulnerable passwords must be on the top 1000 list of passwords handed out to us.
 
 ## 2. Initial Access
 
-To brute force the password we used Hydra on a Kali Linux VM. It took 5 minutes to brute force the password, and the result was the following:
+To brute force the password we used Hydra on a Kali Linux VM. It took 5 minutes to brute force the password using the .txt file containing the top 1000 passwords, and the result was the following:
 
 `12qwaszx`
 
@@ -26,10 +26,11 @@ Now that we could log in to the server, we simply tried to escalate privilage us
 
 ## 4. Security Goal Violations
 
-**Confidentiality** was violated as we could now access everything on the server.
+**Confidentiality** was violated as we as an adversary could access everything on the server using the root privilege.
 
-**Availability** was violated since we have full control of the server, and could simply take it down.
+**Availability** was compromised since we attained control of the server with root access, and therefore had the power to take down the application.
 
-**Integrity** was violated as we have full control, and can change any value contained in the server.
+**Integrity** was undermined as we had control of the server with root access, allowing us to modify data contained in the server.
 
 ## 5. Maintaining Access
+
