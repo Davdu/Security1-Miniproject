@@ -34,3 +34,6 @@ Now that we could log in to the server, we simply tried to escalate privilage us
 
 ## 5. Maintaining Access
 
+We did not do anything to maintain access beyond noting the password for the user 'Weakuser', which also allowed us to escalate privilage to root. We could have created a backdoor to maintain access, but we did not do this.
+
+A few options for maintaining access could be to create a new user with high privilages, or to install a service that we know has a vulnerability that we can exploit to gain access to the server again. 
